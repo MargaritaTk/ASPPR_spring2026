@@ -21,30 +21,43 @@ class JordanMatrixLab
 
             if (!int.TryParse(Console.ReadLine(), out int choice) || choice < 0 || choice > 5) continue;
             if (choice == 0) break;
-
+            int n;
             Console.Write("Введіть кількість рядків n: ");
-            int n = int.Parse(Console.ReadLine());
+            while (!int.TryParse(Console.ReadLine(), out n)) { Console.Write("Помилка! Введіть ціле число n: "); }
+            int m_dim;
             Console.Write("Введіть кількість стовпців m: ");
-            int m_dim = int.Parse(Console.ReadLine());
+            while (!int.TryParse(Console.ReadLine(), out m_dim)) { Console.Write("Помилка! Введіть ціле число m: "); }
 
             double[,] A = new double[n, m_dim];
             double[] B = new double[n];
 
             Console.WriteLine("\nВведіть матрицю A:");
             for (int i = 0; i < n; i++)
+            {
                 for (int j = 0; j < m_dim; j++)
                 {
+                    double val;
                     Console.Write($"A[{i + 1},{j + 1}] = ");
-                    A[i, j] = double.Parse(Console.ReadLine());
+                    while (!double.TryParse(Console.ReadLine()?.Replace(',', '.'), System.Globalization.NumberStyles.Any, System.Globalization.CultureInfo.InvariantCulture, out val))
+                    {
+                        Console.Write($"Невірно! Введіть число для A[{i + 1},{j + 1}] = ");
+                    }
+                    A[i, j] = val;
                 }
+            }
 
             if (choice >= 2 && choice <= 4)
             {
                 Console.WriteLine("\nВведіть вектор B:");
                 for (int i = 0; i < n; i++)
                 {
+                    double val;
                     Console.Write($"B[{i + 1}] = ");
-                    B[i] = double.Parse(Console.ReadLine());
+                    while (!double.TryParse(Console.ReadLine()?.Replace(',', '.'), System.Globalization.NumberStyles.Any, System.Globalization.CultureInfo.InvariantCulture, out val))
+                    {
+                        Console.Write($"Невірно! Введіть число для B[{i + 1}] = ");
+                    }
+                    B[i] = val;
                 }
             }
 
